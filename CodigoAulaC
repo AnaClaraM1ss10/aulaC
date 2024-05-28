@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h> //para gerar numeros aleatórios e utilizar das funções rand e srand
+#include <time.h> //para obter o tempo atual e conseguir gerar os números aleatórios
+
+//compara um valor a e b vendo qual é maior 
+int comparar(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b);
+}
+
+int main(){
+    int i = 0;
+    int igual;
+    int j;
+    int vet[6];
+
+    srand(time(NULL));
+
+    //gera numeros aleatórios enquanto o índice não atingir todas as posições sem repetição de número, comparando o numero anterior com o seguinte e apenas considetrando ele se for diferente do anterior
+    do{
+        vet[i] = rand() % 40; //gera numeros aleatórios entre 0 e 40
+        igual = 0;
+        for(j = 0; j < i; j++){
+            if(vet[j] == vet[i])
+            igual = 1;
+        }
+        if(igual == 0)
+        i++;
+    }while(i < 6);
+  
+    qsort(vet, 6, sizeof(int), comparar);
+
+    for(i = 0; i < 6; i++){
+        printf("\n%d", vet[i]);    
+        
+    }
+    printf("\n\n");
+
+    return 0;
+
+}
